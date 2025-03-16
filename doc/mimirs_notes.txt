@@ -1,0 +1,19 @@
+mimirs_notes.txt   For use with Neovim
+
+===============================================================================
+Plugin Name                     Mimirs Notes
+
+DESCRIPTION
+    This plugin provides a simple way to manage daily notes.
+
+COMMANDS
+    :tnote     Opens today's note file
+    :notes     Opens the main notes file
+
+CONFIGURATION
+    notes_dir is optional, you can just run setup().
+    This will default to ~/notes/ for notes storage
+    Example in your init.lua:
+    > require("plugin_name").setup({ notes_dir = "~/mynotes" })
+    <
+
