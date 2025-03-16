@@ -1,6 +1,7 @@
 <p align="center">
 <img src="./mimir.png" width="150" height="150">
 </p>
+
 # 📓 Mimir’s Notes – A Simple Neovim Notes Plugin
 *A lightweight Neovim plugin for managing daily, general, and relative notes.*
 
