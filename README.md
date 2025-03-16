@@ -56,13 +56,21 @@ use {
 
 ### **Example Workflow**
 1️⃣ Open Neovim
+
 2️⃣ Type `:Tnote` → Creates/opens note for today `~/notes/YYYY-MM-DD.md`
+
 3️⃣ Type `:Ynote` → Opens yesterdays note `~/notes/YESTERDAY_DATE.md`
+
 4️⃣ Type `:Tmnote` → Opens tomorrow's note `~/notes/TOMORROW.md`
+
 5️⃣ Type `:Notes` → Opens `~/notes/notes.md`
+
 6️⃣ Type `:Notes 23` → Opens `~/notes/CURRENT_MONTH-23.md`
+
 7️⃣ Type `:Notes 3-15` → Opens `~/notes/CURRENT_YEAR-03-15.md`
+
 8️⃣ Type `:Notes 2024-03-15` → Opens `~/notes/2024-03-15.md`
+
 9️⃣ Type `:Notes s your_custom_note → Creates/opens `~/notes/your_custom_note.md`
 
 ---
