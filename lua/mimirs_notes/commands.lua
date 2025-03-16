@@ -8,12 +8,17 @@ end
 
 -- Function to ensure notes directory exists
 local function ensure_notes_dir()
-    local notes_dir = require("mimirs_notes.config").get().notes_dir
-    if not dir_exists(notes_dir) then
-        os.execute("mkdir -p " .. notes_dir)
+    local notes_dir = vim.fn.expand("~") .. "/notes"
+
+    -- Check if directory exists
+    local stat = vim.loop.fs_stat(notes_dir)
+    if not stat then
+        vim.loop.fs_mkdir(notes_dir, 493) -- 493 (rwxr-xr-x)
     end
+
     return notes_dir
 end
+
 
 function M.setup()
     -- Command: :Tnote (Opens today's note)
