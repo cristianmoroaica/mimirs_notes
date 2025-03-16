@@ -11,6 +11,7 @@
 
 **Plugins to improve markdown readability:**
 
+
 <a href="https://github.com/MeanderingProgrammer/render-markdown.nvim">MeanderingProgrammer/render-markdown.nvim</a>
 
 <a href="https://github.com/lukas-reineke/headlines.nvim">lukas-reineke/headlines.nvim</a>
@@ -23,7 +24,7 @@
 - ⏩ **`:Tmnote`** – Opens **tomorrow’s note** (`YYYY-MM-DD.md`)
 - 📜 **`:Notes`** – Opens **general notes** (`notes.md`)
 - 📆 **`:Notes <date>`** – Opens a specific date-based note (`YYYY-MM-DD.md`)
-- 📝 **`:Notes "custom name"`** – Creates or opens a custom-named note (`custom name.md`)
+- 📝 **`:Notes custom_name`** – Creates or opens a custom-named note (`custom_name.md`)
 - 📑 **`:NotesList`** – Lists all notes.
 - ☠️  **`:NotesDelete`** – Lists notes for deletion.
 - 🏡 **Customizable directory** – Set your preferred notes location
@@ -69,8 +70,8 @@ use {
 | `:Ynote`    | Opens **yesterday’s note** (`YYYY-MM-DD.md`) in `~/notes/`. |
 | `:Tmnote`   | Opens **tomorrow’s note** (`YYYY-MM-DD.md`) in `~/notes/`. |
 | `:Notes`    | Opens a **general notes file** (`notes.md`) in `~/notes/`. |
-| `:Notes <date>` | Opens a **specific date-based note** (e.g., `:Notes 23` → opens `YYYY-MM-23.md`). |
-| `:Notes "custom name"` | Creates or opens a **custom-named note** (e.g., `:Notes "Project Ideas"` → `~/notes/Project Ideas.md`). |
+| `:Notes <date>` | Opens a **specific date-based note** (e.g., `:Notes 23` → opens `YYYY-MM-23.md`). More examples below. |
+| `:Notes Project Ideas` | Creates or opens a **custom-named note** (e.g., `:Notes Project Ideas` → `~/notes/Project Ideas.md`). |
 | `:NotesList` | Lists all notes. Allows filtering. Using Telescope |
 | `:NotesDelete` | List notes. Select for deletion. Confirmation required. |
 
@@ -91,7 +92,7 @@ use {
 
  Type `:Notes 2024-03-15` → Opens `~/notes/2024-03-15.md`
 
- Type `:Notes s your_custom_note → Creates/opens `~/notes/your_custom_note.md`
+ Type `:Notes your_custom_note → Creates/opens `~/notes/your_custom_note.md`
 
  Type `:NotesList` → Opens Telescope window with all notes. Allows searching.
 
