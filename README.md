@@ -85,7 +85,7 @@ use {
 
  Type `:Notes` → Opens `~/notes/notes.md`
 
- Type `:Notes 23` → Opens `~/notes/CURRENT_MONTH-23.md`
+ Type `:Notes 23` → Opens `~/notes/CURRENT_YEAR-CURRENT_MONTH-23.md`
 
  Type `:Notes 3-15` → Opens `~/notes/CURRENT_YEAR-03-15.md`
 
