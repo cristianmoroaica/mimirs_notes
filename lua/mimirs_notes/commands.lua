@@ -108,7 +108,7 @@ local function add_date_header_if_new()
 
         -- If the file is a custom note (not date-based), don't insert a date
         if formatted_date then
-            local header = "# " .. formatted_date .. "\n"
+            local header = "# " .. formatted_date
             vim.api.nvim_buf_set_lines(0, 0, 0, false, { header, "" })
         end
     end
