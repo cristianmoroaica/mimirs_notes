@@ -1,4 +1,4 @@
-![alt text](https://mimirslab.com/static/media/logoc.39c9758259de54ef752b66e43b219150.svg)
+<img src="https://mimirslab.com/static/media/logoc.39c9758259de54ef752b66e43b219150.svg" width="150" height="150">
 # 📓 Mimir’s Notes – A Simple Neovim Notes Plugin
 *A lightweight Neovim plugin for managing daily, general, and relative notes.*
 
