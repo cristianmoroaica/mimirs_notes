@@ -54,24 +54,24 @@ use {
 | `:Notes <date>` | Opens a **specific date-based note** (e.g., `:Notes 23` → opens `YYYY-MM-23.md`). |
 | `:Notes "custom name"` | Creates or opens a **custom-named note** (e.g., `:Notes "Project Ideas"` → `~/notes/Project Ideas.md`). |
 
-### **Example Workflow**
-1️⃣ Open Neovim
+### **Examples**
+ Open Neovim
 
-2️⃣ Type `:Tnote` → Creates/opens note for today `~/notes/YYYY-MM-DD.md`
+ Type `:Tnote` → Creates/opens note for today `~/notes/YYYY-MM-DD.md`
 
-3️⃣ Type `:Ynote` → Opens yesterdays note `~/notes/YESTERDAY_DATE.md`
+ Type `:Ynote` → Opens yesterdays note `~/notes/YESTERDAY_DATE.md`
 
-4️⃣ Type `:Tmnote` → Opens tomorrow's note `~/notes/TOMORROW.md`
+ Type `:Tmnote` → Opens tomorrow's note `~/notes/TOMORROW.md`
 
-5️⃣ Type `:Notes` → Opens `~/notes/notes.md`
+ Type `:Notes` → Opens `~/notes/notes.md`
 
-6️⃣ Type `:Notes 23` → Opens `~/notes/CURRENT_MONTH-23.md`
+ Type `:Notes 23` → Opens `~/notes/CURRENT_MONTH-23.md`
 
-7️⃣ Type `:Notes 3-15` → Opens `~/notes/CURRENT_YEAR-03-15.md`
+ Type `:Notes 3-15` → Opens `~/notes/CURRENT_YEAR-03-15.md`
 
-8️⃣ Type `:Notes 2024-03-15` → Opens `~/notes/2024-03-15.md`
+ Type `:Notes 2024-03-15` → Opens `~/notes/2024-03-15.md`
 
-9️⃣ Type `:Notes s your_custom_note → Creates/opens `~/notes/your_custom_note.md`
+ Type `:Notes s your_custom_note → Creates/opens `~/notes/your_custom_note.md`
 
 ---
 
