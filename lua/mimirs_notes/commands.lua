@@ -114,6 +114,31 @@ local function add_date_header_if_new()
     end
 end
 
+
+-- Function to confirm deletion
+local function confirm_deletion(file_path)
+    local prompt = "🗑️ Delete " .. file_path .. "? [y/N]: "
+    local choice = vim.fn.input(prompt)
+
+    if choice:lower() == "y" then
+        os.remove(file_path)
+        print("✅ Deleted: " .. file_path)
+    else
+        print("❌ Deletion cancelled.")
+    end
+end
+
+-- Function to handle note deletion via Telescope
+local function delete_selected_note(prompt_bufnr)
+    local selection = require("telescope.actions.state").get_selected_entry()
+    require("telescope.actions").close(prompt_bufnr)
+
+    if selection then
+        local file_path = selection[1]
+        confirm_deletion(file_path)
+    end
+end
+
 function M.setup()
     local notes_dir = ensure_notes_dir()
 
@@ -172,6 +197,26 @@ function M.setup()
         -- Add date header if it's a new file
         vim.defer_fn(add_date_header_if_new, 50) -- Delay execution slightly to ensure buffer is ready
     end, { nargs = "?" })
+
+    -- Command: :NotesDelete - Select & delete a note via Telescope
+    vim.api.nvim_create_user_command("NotesDelete", function()
+        local files = list_notes()
+        if #files == 0 then
+            print("📂 No notes found!")
+            return
+        end
+
+        require("telescope.pickers").new({}, {
+            prompt_title = "🗑️ Select a Note to Delete",
+            finder = require("telescope.finders").new_table({ results = files }),
+            sorter = require("telescope.sorters").get_fuzzy_file(),
+            attach_mappings = function(_, map)
+                map("i", "<CR>", delete_selected_note) -- In insert mode
+                map("n", "<CR>", delete_selected_note) -- In normal mode
+                return true
+            end,
+        }):find()
+    end, {})
 end
 
 return M
