@@ -30,9 +30,17 @@ local function list_notes()
     local notes_dir = ensure_notes_dir()
     local files = {}
 
-    -- Read the directory for notes
-    for file in vim.fn.glob(notes_dir .. "/*.md", true, true) do
-        table.insert(files, file)
+    -- Ensure glob is correctly called as a function
+    local file_list = vim.fn.glob(notes_dir .. "/*.md", false, true)
+
+    -- Ensure file_list is an iterable table (it should be a list of files)
+    if type(file_list) == "table" then
+        for _, file in ipairs(file_list) do
+            table.insert(files, file)
+        end
+    elseif type(file_list) == "string" and file_list ~= "" then
+        -- If vim.fn.glob returns a single string (not a table), insert it directly
+        table.insert(files, file_list)
     end
 
     return files
