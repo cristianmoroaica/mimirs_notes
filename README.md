@@ -8,7 +8,11 @@
 - ⏪ **`:Ynote`** – Opens **yesterday’s note** (`YYYY-MM-DD.md`)
 - ⏩ **`:Tmnote`** – Opens **tomorrow’s note** (`YYYY-MM-DD.md`)
 - 📜 **`:Notes`** – Opens **general notes** (`notes.md`)
+- 📆 **`:Notes <date>`** – Opens a specific date-based note (`YYYY-MM-DD.md`)
+- 📝 **`:Notes "custom name"`** – Creates or opens a custom-named note (`custom name.md`)
 - 🏡 **Customizable directory** – Set your preferred notes location
+- 🔄 **Supports various date formats** (single day, month-day, year-month-day, custom names)
+
 ---
 
 ## 📦 Installation
@@ -47,13 +51,19 @@ use {
 | `:Ynote`    | Opens **yesterday’s note** (`YYYY-MM-DD.md`) in `~/notes/`. |
 | `:Tmnote`   | Opens **tomorrow’s note** (`YYYY-MM-DD.md`) in `~/notes/`. |
 | `:Notes`    | Opens a **general notes file** (`notes.md`) in `~/notes/`. |
+| `:Notes <date>` | Opens a **specific date-based note** (e.g., `:Notes 23` → opens `YYYY-MM-23.md`). |
+| `:Notes "custom name"` | Creates or opens a **custom-named note** (e.g., `:Notes "Project Ideas"` → `~/notes/Project Ideas.md`). |
 
 ### **Example Workflow**
-1️⃣ Open Neovim  
-2️⃣ Type `:Tnote` → Creates/opens `~/notes/YYYY-MM-DD.md`  
-3️⃣ Type `:Ynote` → Opens `~/notes/YESTERDAY.md`  
-4️⃣ Type `:Tmnote` → Opens `~/notes/TOMORROW.md`  
-5️⃣ Type `:Notes` → Opens `~/notes/notes.md`  
+1️⃣ Open Neovim
+2️⃣ Type `:Tnote` → Creates/opens note for today `~/notes/YYYY-MM-DD.md`
+3️⃣ Type `:Ynote` → Opens yesterdays note `~/notes/YESTERDAY_DATE.md`
+4️⃣ Type `:Tmnote` → Opens tomorrow's note `~/notes/TOMORROW.md`
+5️⃣ Type `:Notes` → Opens `~/notes/notes.md`
+6️⃣ Type `:Notes 23` → Opens `~/notes/CURRENT_MONTH-23.md`
+7️⃣ Type `:Notes 3-15` → Opens `~/notes/CURRENT_YEAR-03-15.md`
+8️⃣ Type `:Notes 2024-03-15` → Opens `~/notes/2024-03-15.md`
+9️⃣ Type `:Notes s your_custom_note → Creates/opens `~/notes/your_custom_note.md`
 
 ---
 
@@ -72,6 +82,7 @@ By default, notes are stored in `~/notes/`.
 To verify that the plugin is creating files correctly, run:
 ```sh
 ls -l ~/notes
+(For default dir location)
 ```
 ---
 
@@ -79,4 +90,8 @@ ls -l ~/notes
 | **Issue** | **Solution** |
 |-----------|-------------|
 | `:Tnote` doesn’t create the directory | Ensure `mkdir` permissions: `mkdir -p ~/notes` |
-| `:Notes` or `:Tnote` doesn’t open files | Check if `vim.loop.fs_mkdir()` is creating `~/notes/` |
+| `:Notes` or `:Tnote` doesn’t open files | Check if `vim.fn.mkdir()` is creating `~/notes/` properly |
+| `:Notes <date>` doesn't open correctly | Ensure the date format is valid (`YYYY-MM-DD`, `MM-DD`, or `D`) |
+| `:Notes "custom name"` doesn't work | Ensure the name is quoted properly (`"Custom Note"`) |
+
+
