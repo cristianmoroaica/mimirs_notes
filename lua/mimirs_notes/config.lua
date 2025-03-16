@@ -1,7 +1,7 @@
 local M = {}
 
 local default_opts = {
-    notes_dir = os.getenv("HOME") .. "/notes" -- Default notes directory
+    notes_dir = vim.fn.expand("~") .. "/notes" -- Default notes directory
 }
 
 M.options = default_opts
