@@ -25,6 +25,7 @@
 - 📆 **`:Notes <date>`** – Opens a specific date-based note (`YYYY-MM-DD.md`)
 - 📝 **`:Notes "custom name"`** – Creates or opens a custom-named note (`custom name.md`)
 - 📑 **`:NotesList`** – Lists all notes.
+- ☠️  **`:NotesDelete`** – Lists notes for deletion.
 - 🏡 **Customizable directory** – Set your preferred notes location
 - 🔄 **Supports various date formats** (single day, month-day, year-month-day, custom names)
 
@@ -71,6 +72,7 @@ use {
 | `:Notes <date>` | Opens a **specific date-based note** (e.g., `:Notes 23` → opens `YYYY-MM-23.md`). |
 | `:Notes "custom name"` | Creates or opens a **custom-named note** (e.g., `:Notes "Project Ideas"` → `~/notes/Project Ideas.md`). |
 | `:NotesList` | Lists all notes. Allows filtering. Using Telescope |
+| `:NotesDelete` | List notes. Select for deletion. Confirmation required. |
 
 ### **Examples**
  Open Neovim
