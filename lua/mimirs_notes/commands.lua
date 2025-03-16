@@ -82,6 +82,14 @@ local function get_note_filename(offset)
     return os.date("%Y-%m-%d", time) .. ".md"
 end
 
+-- Check buffer and add date if empty
+local function add_date_header_if_new()
+    if vim.fn.line("$") == 1 and vim.fn.getline(1) == "" then
+        local date_header = "# " .. os.date("%A, %B %d, %Y") .. "\n"
+        vim.api.nvim_buf_set_lines(0, 0, 0, false, { date_header, "" }) -- Insert header at the top
+    end
+end
+
 function M.setup()
     local notes_dir = ensure_notes_dir()
 
@@ -137,6 +145,8 @@ function M.setup()
             -- Open the general notes file if no argument is provided
             vim.cmd("e " .. notes_dir .. "/notes.md")
         end
+        -- Add date header if it's a new file
+        vim.defer_fn(add_date_header_if_new, 50) -- Delay execution slightly to ensure buffer is ready
     end, { nargs = "?" })
 end
 
