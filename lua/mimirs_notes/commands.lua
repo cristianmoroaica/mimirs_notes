@@ -7,7 +7,10 @@ local function ensure_notes_dir()
     -- Check if directory exists
     local stat = vim.loop.fs_stat(notes_dir)
     if not stat then
-        vim.loop.fs_mkdir(notes_dir, 0o755) -- rwxr-xr-x
+        if vim.fn.isdirectory(notes_dir) == 0 then
+            vim.fn.mkdir(notes_dir, "p")
+        end
+
     end
 
     return notes_dir
@@ -49,12 +52,12 @@ function M.setup()
             if string.match(input, "^%d+$") then
                 input = string.format("%s-%s-%02d", current_year, current_month, tonumber(input))
 
-            -- Case 2: Month-Day → Assume current year
+                -- Case 2: Month-Day → Assume current year
             elseif string.match(input, "^%d%d?%-%d%d?$") then
                 local month, day = input:match("^(%d%d?)%-(%d%d?)$")
                 input = string.format("%s-%02d-%02d", current_year, tonumber(month), tonumber(day))
 
-            -- Case 3: Invalid date format. Creating custom notes
+                -- Case 3: Invalid date format. Creating custom notes
             elseif not string.match(input, "^%d%d?%-%d%d?%-%d+$") then
                 print("Creating custom note: " .. input)
             end
