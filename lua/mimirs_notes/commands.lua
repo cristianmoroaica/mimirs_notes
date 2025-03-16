@@ -85,7 +85,7 @@ end
 -- Check buffer and add date if empty
 local function add_date_header_if_new()
     if vim.fn.line("$") == 1 and vim.fn.getline(1) == "" then
-        local date_header = "# " .. os.date("%A, %B %d, %Y") .. "\n"
+        local date_header = "# " .. os.date("%A, %B %d, %Y") .. ""
         vim.api.nvim_buf_set_lines(0, 0, 0, false, { date_header, "" }) -- Insert header at the top
     end
 end
