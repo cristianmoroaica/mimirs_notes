@@ -1,4 +1,17 @@
 local M = {}
+local actions = require("telescope.actions")
+local action_state = require("telescope.actions.state")
+local pickers = require("telescope.pickers")
+local finders = require("telescope.finders")
+local sorters = require("telescope.sorters")
+
+
+-- Attempt to load Telescope safely
+local has_telescope, telescope = pcall(require, "telescope")
+
+if not has_telescope then
+    print("❌ Telescope.nvim is not installed. NotesList & NotesFind will not work.")
+end
 
 -- Ensure the notes directory exists
 local function ensure_notes_dir()
@@ -12,6 +25,49 @@ local function ensure_notes_dir()
     return notes_dir
 end
 
+-- List all files in notes directory
+local function list_notes()
+    local notes_dir = ensure_notes_dir()
+    local files = {}
+
+    -- Read the directory for notes
+    for file in vim.fn.glob(notes_dir .. "/*.md", true, true) do
+        table.insert(files, file)
+    end
+
+    return files
+end
+
+-- Open selected note from Telescope
+local function open_selected_note(prompt_bufnr)
+    local selection = action_state.get_selected_entry()
+    actions.close(prompt_bufnr)
+    if selection then
+        vim.cmd("e " .. selection[1])
+    end
+end
+
+-- Telescope Picker for Listing Notes
+local function list_notes_picker()
+    local files = list_notes()
+
+    if #files == 0 then
+        print("📂 No notes found!")
+        return
+    end
+
+    pickers.new({}, {
+        prompt_title = "📜 Notes",
+        finder = finders.new_table({ results = files }),
+        sorter = sorters.get_fuzzy_file(),
+        attach_mappings = function(_, map)
+            map("i", "<CR>", open_selected_note)
+            map("n", "<CR>", open_selected_note)
+            return true
+        end,
+    }):find()
+end
+
 -- Function to generate note filenames based on offset (e.g., today, yesterday, tomorrow)
 local function get_note_filename(offset)
     local time = os.time() + (offset * 24 * 60 * 60)
@@ -20,6 +76,15 @@ end
 
 function M.setup()
     local notes_dir = ensure_notes_dir()
+
+    -- Command: :NotesList (Lists all notes)
+    vim.api.nvim_create_user_command("NotesList", function()
+        if not has_telescope then
+            print("❌ Telescope.nvim is not installed. Install it to use NotesList.")
+            return
+        end
+        list_notes_picker()
+    end, {})
 
     -- Command: :Tnote (Opens today's note)
     vim.api.nvim_create_user_command("Tnote", function()
@@ -48,12 +113,12 @@ function M.setup()
             if string.match(input, "^%d+$") then
                 input = string.format("%s-%s-%02d", current_year, current_month, tonumber(input))
 
-            -- Case 2: Month-Day → Assume current year
+                -- Case 2: Month-Day → Assume current year
             elseif string.match(input, "^%d%d?%-%d%d?$") then
                 local month, day = input:match("^(%d%d?)%-(%d%d?)$")
                 input = string.format("%s-%02d-%02d", current_year, tonumber(month), tonumber(day))
 
-            -- Case 3: Custom Notes (invalid date format)
+                -- Case 3: Custom Notes (invalid date format)
             else
                 print("📄 Creating custom note: " .. input)
             end
