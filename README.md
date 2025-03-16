@@ -110,7 +110,3 @@ ls -l ~/notes
 |-----------|-------------|
 | `:Tnote` doesn’t create the directory | Ensure `mkdir` permissions: `mkdir -p ~/notes` |
 | `:Notes` or `:Tnote` doesn’t open files | Check if `vim.fn.mkdir()` is creating `~/notes/` properly |
-| `:Notes <date>` doesn't open correctly | Ensure the date format is valid (`YYYY-MM-DD`, `MM-DD`, or `D`) |
-| `:Notes "custom name"` doesn't work | Ensure the name is quoted properly (`"Custom Note"`) |
-
-
