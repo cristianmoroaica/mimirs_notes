@@ -82,11 +82,35 @@ local function get_note_filename(offset)
     return os.date("%Y-%m-%d", time) .. ".md"
 end
 
+-- Generate date for header
+local function extract_date_from_filename(filename)
+    -- Match "YYYY-MM-DD" or "YY-M-D" format
+    local year, month, day = filename:match("(%d%d%d%d)%-(%d%d?)%-(%d%d?)")
+
+    -- If no match, try "YY-M-D" short format
+    if not year then
+        year, month, day = filename:match("(%d%d)%-(%d%d?)%-(%d%d?)")
+        if year then
+            year = "20" .. year -- Convert YY to YYYY
+        end
+    end
+
+    if not year then return nil end
+
+    return os.date("%A, %B %d, %Y", os.time({ year = tonumber(year), month = tonumber(month), day = tonumber(day) }))
+end
+
 -- Check buffer and add date if empty
 local function add_date_header_if_new()
     if vim.fn.line("$") == 1 and vim.fn.getline(1) == "" then
-        local date_header = "# " .. os.date("%A, %B %d, %Y") .. ""
-        vim.api.nvim_buf_set_lines(0, 0, 0, false, { date_header, "" }) -- Insert header at the top
+        local filename = vim.fn.expand("%:t:r") -- Removes path & extension
+        local formatted_date = extract_date_from_filename(filename)
+
+        -- If the file is a custom note (not date-based), don't insert a date
+        if formatted_date then
+            local header = "# " .. formatted_date .. "\n"
+            vim.api.nvim_buf_set_lines(0, 0, 0, false, { header, "" })
+        end
     end
 end
 
