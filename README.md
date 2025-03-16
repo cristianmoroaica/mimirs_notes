@@ -4,7 +4,10 @@
 
 # 📓 Mimir’s Notes – A Simple Neovim Notes Plugin
 *A lightweight Neovim plugin for managing daily, general, and relative notes.*
+
 *Using a plugin to improve viewing Markdown files is recommended.*
+
+*Telescope is necessary for listing and searching notes*
 
 **Plugins to improve markdown readability:**
 
@@ -21,6 +24,7 @@
 - 📜 **`:Notes`** – Opens **general notes** (`notes.md`)
 - 📆 **`:Notes <date>`** – Opens a specific date-based note (`YYYY-MM-DD.md`)
 - 📝 **`:Notes "custom name"`** – Creates or opens a custom-named note (`custom name.md`)
+- 📑 **`:NotesList`** – Lists all notes.
 - 🏡 **Customizable directory** – Set your preferred notes location
 - 🔄 **Supports various date formats** (single day, month-day, year-month-day, custom names)
 
@@ -32,7 +36,8 @@
 Add this to your **Neovim configuration (`lazy.lua` or `init.lua`)**:
 ```lua
 {
-    "cristianmoroaica/mimirs_notes",
+    "cristianmoroaica/mimirs_notes.nvim",
+    dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
     config = function()
         require("mimirs_notes").setup({
             notes_dir = "~/mynotes" -- Optional: Change default directory
@@ -44,7 +49,8 @@ Add this to your **Neovim configuration (`lazy.lua` or `init.lua`)**:
 ### **Packer.nvim**
 ```lua
 use {
-    "cristianmoroaica/mimirs_notes",
+    "cristianmoroaica/mimirs_notes.nvim",
+    dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
     config = function()
         require("mimirs_notes").setup({
             notes_dir = "~/mynotes" -- Optional
@@ -64,6 +70,7 @@ use {
 | `:Notes`    | Opens a **general notes file** (`notes.md`) in `~/notes/`. |
 | `:Notes <date>` | Opens a **specific date-based note** (e.g., `:Notes 23` → opens `YYYY-MM-23.md`). |
 | `:Notes "custom name"` | Creates or opens a **custom-named note** (e.g., `:Notes "Project Ideas"` → `~/notes/Project Ideas.md`). |
+| `:NotesList` | Lists all notes. Allows filtering. Using Telescope |
 
 ### **Examples**
  Open Neovim
@@ -83,6 +90,8 @@ use {
  Type `:Notes 2024-03-15` → Opens `~/notes/2024-03-15.md`
 
  Type `:Notes s your_custom_note → Creates/opens `~/notes/your_custom_note.md`
+
+ Type `:NotesList` → Opens Telescope window with all notes. Allows searching.
 
 ---
 
