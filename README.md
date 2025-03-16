@@ -11,7 +11,7 @@
 <a href="https://github.com/MeanderingProgrammer/render-markdown.nvim">MeanderingProgrammer/render-markdown.nvim</a>
 
 <a href="https://github.com/lukas-reineke/headlines.nvim">lukas-reineke/headlines.nvim</a>
-    j
+
 ---
 
 ## 🚀 Features
